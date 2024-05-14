@@ -2,6 +2,8 @@
 
 int ft_printadress(unsigned long long n)
 {
+        if((void *)n == NULL)
+                return(ft_putstr("(nil)"));
         write(1,"0x",2);
         return ft_putadress(n);
 }
