@@ -99,7 +99,7 @@ int    ft_printf(const char *str, ...)
         ft_printf("cspdiuxX%");        
 }  */
 
-int	main(void)
+ int	main(void)
 {
 	ft_printf("%d \n", ft_printf("ola%%%"));
 	//printf("%d \n", printf("ola%%%"));
