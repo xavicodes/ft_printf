@@ -1,14 +1,11 @@
 #include "ft_printf.h"
 
 int	ft_putchar(char c)
-{       if(c)
-        {
+{
 	write(1, &c, 1);
         return (1);
-        }
-        else
-                return (0);
-}  
+}
+
 int ft_putstr(char *str)
 {
         int i;

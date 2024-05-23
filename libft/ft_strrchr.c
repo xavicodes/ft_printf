@@ -6,13 +6,12 @@
 /*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:15:42 by xlourenc          #+#    #+#             */
-/*   Updated: 2024/04/29 13:37:20 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/13 12:43:42 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//-------------------------ESTUDAR ESTA MERDA!--------------------------------
 char	*ft_strrchr(const char *str, int c)
 {
 	int	i;
@@ -36,7 +35,6 @@ int	main(void)
 
 		c = 'x';
 		char str[30] ="hello mx frined x prank";
-		printf("%s",strrchr(str,c));
+		printf("%s",ft_strrchr(str,c));
 		return (0);
-}
-*/
+}*/

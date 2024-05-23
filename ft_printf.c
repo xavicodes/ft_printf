@@ -6,15 +6,17 @@
 /*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:59:41 by xaviermonte       #+#    #+#             */
-/*   Updated: 2024/05/14 16:37:28 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:15:40 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include "ft_printf.h"
 #include <limits.h>
+#include <string.h>
+#include "ft_printf.h"
+
 
 int ft_pick(va_list args,char format)
 {
@@ -30,15 +32,15 @@ int ft_pick(va_list args,char format)
          else if(format == 'd')
                 i = ft_putnbr(va_arg(args,int));
         else if(format == 'i')
-               i = ft_putnbr(va_arg(args,int));
+                i = ft_putnbr(va_arg(args,int));
           else if(format == 'u')
-                  i = ft_putunsignednbr(va_arg(args,unsigned int));
-         else if(format == 'x')
-                 i = ft_puthexnbr(va_arg(args,unsigned int),('a'));
+                i = ft_uint(va_arg(args, unsigned int));
+          else if(format == 'x')
+                i = ft_putnbrbase(va_arg(args,unsigned int), ("0123456789abcdef"));
          else if(format == 'X')
-                 i = ft_puthexnbr(va_arg(args,unsigned int),('a'));
+                i = ft_putnbrbase(va_arg(args,unsigned int),("0123456789ABCDEF")); 
          else if(format == 'p')
-                 i = ft_printadress(va_arg(args, unsigned long long));
+                i = ft_printadress(va_arg(args, long),("0123456789abcdef"));
         return (i);
 }
 int    ft_printf(const char *str, ...)
@@ -99,7 +101,7 @@ int    ft_printf(const char *str, ...)
         ft_printf("cspdiuxX%");        
 }  */
 
- int	main(void)
+/*    int	main(void)
 {
 	ft_printf("%d \n", ft_printf("ola%%%"));
 	//printf("%d \n", printf("ola%%%"));
@@ -109,10 +111,10 @@ int    ft_printf(const char *str, ...)
 	int teste2 = ft_printf("hello world\n");
 	ft_printf("imprimiu: %d\n", teste2);
 	printf("\n");
-	int x = 42;
+	//int x = 42;
 	int x2 = 34;
 	void *ptrx2 = &x2;
-	void *ptr = &x;
+	//void *ptr = &x;
 
 	
 	ft_printf("Hello\n");
@@ -123,13 +125,13 @@ int    ft_printf(const char *str, ...)
 	ft_printf("DECIMAL: %i %d\n", 42, 123);
 	ft_printf ("DECIMALS: %d %d\n", 1977, 650000L);
 	ft_printf("POINTER NULO: %p \n", NULL ); //esta mal
-	ft_printf("POINTER DE x é: %p\n", ptr);
+	ft_printf("POINTER é: %p\n", (void*)1000000);
 	ft_printf("POINTER 0: %p %p \n", (void *)0, (void *)0); //esta mal
 	ft_printf ("DECIMAL e HEXADECIMAL: %d %x %X \n", 255, 255, 255);
 	ft_printf ("HEXADECIMAL 0: %x %X\n", 0, 0);
 	ft_printf ("Unsigned int: %u %u\n",  2147483647, UINT_MAX);
 	ft_printf ("Unsigned int: %u \n", UINT_MAX);
-	ft_printf ("Mix: %c, %s, %p, %d, %i, %x, %X, %u, %%, all mixed\n", 'A',
+ 	ft_printf ("Mix: %c, %s, %p, %d, %i, %x, %X, %u, %%, all mixed\n", 'A',
 		"Mix", ptrx2, 34, 34, 255, 255, UINT_MAX);
 
 
@@ -143,7 +145,7 @@ int    ft_printf(const char *str, ...)
 	printf("Decimal: %d %d\n", 42, 123);
 	printf ("Decimals: %d %ld\n", 1977, 650000L);
 	printf("Pointer nulo: %p \n", NULL );
-	printf("Pointer de x é: %p\n", ptr);
+	printf("Pointer de x é: %p\n", (void*)1000000);
 	printf("Pointer 0: %p %p \n", (void *)0, (void *)0);
 	printf ("Decimal e hexadecimal: %d %x %X \n", 255, 255, 255);
 	printf (" Hexadecimal 0: %x %X\n", 0, 0);
@@ -152,7 +154,4 @@ int    ft_printf(const char *str, ...)
 	printf ("Mix: %c, %s, %p, %d, %i, %x, %X, %u, %%, all mixed\n", 'A', "Mix",
 		ptrx2, 34, 34, 255, 255, UINT_MAX);
 	return (0);
-}
-
-
-
+}  */ 

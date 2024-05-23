@@ -1,98 +1,57 @@
 #include "ft_printf.h"
 
-int     ft_putnbrbase(int n)
+char	*ft_putunsignednbr(unsigned int n)
 {
-        write(1,&n,1);
-        return (1);
-}
-//-------
-int ft_putunsignednbr(unsigned int n)
-{	
-        unsigned int	digit;
+	char			*strnum;
+	unsigned int	numb;
+	int				digits;
 
-	digit = 0;
-	
-	if (n < 10)
+	digits = ft_dividenbrbase(n, 10); 
+	numb = (unsigned int)n;
+	strnum = malloc(sizeof(char) * (digits + 1));
+	if (!strnum)
+		return (0);
+	strnum[digits] = '\0';
+	while (digits > 0)
 	{
-		ft_putchar(n + '0');
+		strnum[digits - 1] = numb % 10 + '0';
+		numb /= 10;
+		digits--;
 	}
-	else if (n >= 10)
-	{
-		ft_putunsignednbr((n / 10));
-		digit = (n % 10) + '0';
-		ft_putchar(digit);
-	}
-        return(ft_dividenbr(n));
-
+	return (strnum);
 }
 
 int	ft_putnbr(int n)
 {
-	int	digit;
+	size_t	len;
+	char	*str;
 
-	digit = 0;
-	if (n < 0)
-	{
-		if (n == -2147483648)
-		{
-			write(1, "-2147483648", 12);
-			return(ft_dividenbr(n));
-		}
-		write(1, "-", 1);
-		n *= -1;
-	}
-	if (n < 10)
-	{
-		ft_putchar(n + '0');
-	}
-	else if (n >= 10)
-	{
-		ft_putnbr((n / 10));
-		digit = (n % 10) + '0';
-		ft_putchar(digit);
-	}
-        return(ft_dividenbr(n));
+	str = ft_itoa(n);
+	len = ft_putstr(str);
+	free(str);
+	return (len);
 }
-int ft_puthexnbr(long long n,int format)
+
+int	ft_putnbrbase(unsigned int n, char *format)
 {
-        size_t len;
+	size_t	basedlen;
 
-        len = ft_dividenbr(n);
-
-        while(n/16)
-        {
-                ft_puthexnbr(n/16,format);
-                n = n%16;
-        }
-        if(n <= 9)
-                n = n +'0';
-        else
-                n = n + format - 10;
-        write(1,&n,1);
-        
-        return (len);
-        
+	basedlen = ft_dividenbrbase(n, 16);
+	if (n >= 16)
+	{
+		ft_putnbrbase(n = n / 16, format);
+		ft_putchar(format[n % 16]);
+	}
+	return (basedlen);
 }
-int ft_putadress(unsigned long long       n)
+
+int	ft_uint(unsigned int nbr)
 {
-        if(!n)
-                return (ft_putstr("(nill)"));
-        size_t len;
+	char	*str;
+	int		len;
 
-        len = ft_dividenbr(n);
-
-        while(n/16)
-        {
-                ft_putadress(n/16);
-                n = n%16;
-        }
-        if(n <= 9)
-                n = n +'0';
-        else
-                n = n + 'a' - 10;
-        write(1,&n,1);
-
-return(len+2);
+	str = ft_putunsignednbr(nbr);
+	len = ft_putstr(str);
+	free(str);
+	return (len);
 }
-
-

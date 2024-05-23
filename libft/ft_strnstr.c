@@ -6,7 +6,7 @@
 /*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:53:13 by xlourenc          #+#    #+#             */
-/*   Updated: 2024/04/15 15:32:54 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:15:23 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	{
 		return ((char *)big);
 	}
-	while (big[b] && len > b)
+	while (big[b] && len >= b)
 	{
 		lit = 0;
 		l_len = ft_strlen(little);
 		while (big[b + lit] != '\0' && little[lit] != '\0' && big[b
-			+ lit] == little[lit] && b + lit < len)
+				+ lit] == little[lit] && b + lit < len)
 		{
 			lit++;
 		}

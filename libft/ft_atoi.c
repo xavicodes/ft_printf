@@ -6,7 +6,7 @@
 /*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 12:10:58 by xlourenc          #+#    #+#             */
-/*   Updated: 2024/04/29 13:31:55 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:09:11 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int neg;
-	int i;
-	int num;
+	int	neg;
+	int	i;
+	int	num;
 
 	i = 0;
 	neg = 1;

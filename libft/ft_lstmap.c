@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xaviermonteiro <xaviermonteiro@student.    +#+  +:+       +#+        */
+/*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:17:40 by xaviermonte       #+#    #+#             */
-/*   Updated: 2024/04/30 14:25:08 by xaviermonte      ###   ########.fr       */
+/*   Updated: 2024/05/10 13:27:31 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new_list;
-	t_list *save;
+	t_list	*new_list;
+	t_list	*save;
 
 	if (!lst || !f || !del)
 		return (0);
@@ -37,5 +37,4 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	new_list->next = NULL;
 	return (save);
-
 }

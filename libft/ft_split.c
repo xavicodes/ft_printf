@@ -6,127 +6,114 @@
 /*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:17:29 by xlourenc          #+#    #+#             */
-/*   Updated: 2024/04/22 13:55:46 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:59:35 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_tokens(char const *str, char del)
+static int	count_words(const char *str, char c)
 {
 	int	i;
-	int	tokens;
+	int	toggle;
 
 	i = 0;
-	tokens = 0;
-	while (str[i])
+	toggle = 0;
+	if (str == NULL)
+		return (0);
+	while (*str)
 	{
-		while (str[i] == del)
-			i++;
-		if (str[i] != del && (i == 0 || str[i - 1] == del))
+		if (*str != c && toggle == 0)
 		{
-			tokens++;
-		}
-		if (str[i])
+			toggle = 1;
 			i++;
+		}
+		else if (*str == c)
+			toggle = 0;
+		str++;
 	}
-	return (tokens);
+	return (i);
 }
 
-int	safe_malloc(char ***v_token, int p, size_t len)
+void	safe(char **split, int nbr)
 {
-	int	i;
-
-	i = 0;
-	*v_token = malloc(sizeof(char *) * (p + 1));
-	if (*v_token == NULL)
-		return (1);
-	while (i < p)
-	{
-		(*v_token)[i] = malloc(len);
-		if ((*v_token)[i] == NULL)
-		{
-			while (i > 0)
-			{
-				free((*v_token)[i - 1]);
-				i--;
-			}
-			free(*v_token);
-			return (1);
-		}
-		i++;
-	}
-	(*v_token)[p] = NULL;
-	return (0);
+	if (!*split || !split)
+		while (split[nbr] > 0)
+			free(split[nbr--]);
+	free(*split);
+	return ;
 }
 
-int	ft_fill(char **v_tokens, const char *s, char del)
+static char	*word_dup(const char *str, int start, int finish)
 {
-	int	i;
-	int	v;
-	int	len;
+	char	*word;
+	int		i;
 
 	i = 0;
-	v = 0;
-	while (s[i])
-	{
-		len = 0;
-		while (s[i] == del && s[i])
-			i++;
-		while (s[i] != del && s[i])
-		{
-			i++;
-			len++;
-		}
-		if (len > 0)
-		{
-			v_tokens[v] = malloc(len + 1);
-			if (v_tokens[v] == NULL)
-				return (1);
-			ft_strlcpy(v_tokens[v], s + i - len, len);
-			v_tokens[v][len] = '\0';
-			v++;
-		}
-	}
-	return (0);
+	word = malloc((finish - start + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		tokens;
-	char	**v_tokens;
+	size_t	i;
+	size_t	j;
+	int		index;
+	char	**split;
 
-	if (s == NULL)
-		return (NULL);
-	tokens = count_tokens(s, c);
-	if (tokens <= 0)
-		return (NULL);
-	if (safe_malloc(&v_tokens, tokens, ft_strlen(s) + 1))
-		return (NULL);
-	if (ft_fill(v_tokens, s, c))
-		return (NULL);
-	return (v_tokens);
+	split = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
+		return (free(split), NULL);
+	i = -1;
+	j = 0;
+	index = -1;
+	while (++i <= ft_strlen(s))
+	{
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		{
+			split[j++] = word_dup(s, index, i);
+			if (!split)
+				return (safe(split, j), NULL);
+			index = -1;
+		}
+	}
+	split[j] = 0;
+	return (split);
 }
 
 /* int	main(void)
 {
-	char str[] = " hello my friend!";
-	char c = ' ';
-	char **tokens = ft_split(str, c);
-	if (tokens != NULL)
+	char **split = ft_split("Hello world", ' ');
+	int i = 0;
+	while(split[i])
 	{
-		int i = 0;
-		while (tokens[i])
-		{
-			printf("%s\n", tokens[i]);
-			free(tokens[i]);
-			i++;
-		}
-		free(tokens);
+		printf("str: %s\n", split[i]);
+		free(split[i]);
+		i++;
 	}
-	else
-	{
-		printf("Failed to split the string.\n");
-	}
-	return (0);
 } */
+
+/*  int main()
+{
+	char *str = NULL;
+	char **split = ft_split(str, ' ');
+	int i = 0;
+
+	if(split == NULL)
+	{
+		printf("split failed");
+		return (1);
+	}
+	while(split[i])
+	{
+	printf("split: %s\n", split[i]);
+	i++;
+	}
+}  */
