@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xlourenc <xlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xlourenc <xlourenc@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:59:41 by xaviermonte       #+#    #+#             */
-/*   Updated: 2024/05/23 13:15:40 by xlourenc         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:24:31 by xlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,23 @@ int ft_pick(va_list args,char format)
 
         i = 0;
         if(format == 'c')
-              i = ft_putchar(va_arg(args,int));
+              i += ft_putchar(va_arg(args,int));
         else if( format == '%')
-                i = ft_putchar('%');
+                i += ft_putchar('%');
         else if(format == 's')
-                i = ft_putstr(va_arg(args,char *));     
+                i += ft_putstr(va_arg(args,char *));     
          else if(format == 'd')
-                i = ft_putnbr(va_arg(args,int));
+                i += ft_putnbr(va_arg(args,int));
         else if(format == 'i')
-                i = ft_putnbr(va_arg(args,int));
+                i += ft_putnbr(va_arg(args,int));
           else if(format == 'u')
-                i = ft_uint(va_arg(args, unsigned int));
+                i += ft_putnbr_unsigned(va_arg(args, unsigned int));
           else if(format == 'x')
-                i = ft_putnbrbase(va_arg(args,unsigned int), ("0123456789abcdef"));
+                i += ft_putnbrbase(va_arg(args,unsigned int), ("0123456789abcdef"));
          else if(format == 'X')
-                i = ft_putnbrbase(va_arg(args,unsigned int),("0123456789ABCDEF")); 
+                i += ft_putnbrbase(va_arg(args,unsigned int),("0123456789ABCDEF")); 
          else if(format == 'p')
-                i = ft_printadress(va_arg(args, long),("0123456789abcdef"));
+                i += ft_printadress(va_arg(args,void *),("0123456789abcdef"));
         return (i);
 }
 int    ft_printf(const char *str, ...)
@@ -68,6 +68,12 @@ int    ft_printf(const char *str, ...)
         va_end (args);
         return (len);
 }
+/*    int main()
+{
+        unsigned int str = 1234567;
+        printf("%u\n",ft_printf("%u\n", str));
+        printf("%u\n",printf("%u\n", str));
+} */
 /* int main()
 {
         char *str = "12";

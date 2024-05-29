@@ -16,7 +16,7 @@ int ft_putchar(char c);
 
 int ft_uint(unsigned int nbr);
 
-int ft_printadress( long n,char *format);
+int ft_printadress(void *n,char *format);
 
 int ft_dividenbr(int d);
 
@@ -28,6 +28,10 @@ int	ft_putnbr(int n);
 
 int ft_putnbrbase(unsigned int n, char *format);
 
-int ft_dividenbrbase(int n, int base);
+int ft_putnbrbasep(unsigned long long n, char *format);
+
+int ft_dividenbrbase(long long int n, int base);
+
+size_t  ft_putnbr_unsigned(unsigned int n);
 
 #endif
